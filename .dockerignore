@@ -1,0 +1,47 @@
+# Virtual environment
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing and coverage
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+tests/
+test_*.py
+*_test.py
+
+# Development files
+Makefile
+*.md
+.git/
+.gitignore
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker compose (not needed in production image)
+docker-compose.yml
+docker-compose.*.yml
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./sonarr-config:/config
+      - ./tv-shows:/tv  # Your TV shows directory
+      - ./downloads:/downloads  # Your downloads directory
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  starrr:
+    image: ghcr.io/yourusername/starrr:latest
+    container_name: starrr
+    environment:
+      - LOG_LEVEL=INFO
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+# Example Sonarr Custom List Configuration:
+# 1. In Sonarr, go to Settings → Import Lists → Add List → Custom List
+# 2. Name: "Bryan Cranston Shows"
+# 3. List URL: http://starrr:8000/shows/bryan-cranston
+# 4. Save and test the connection
